@@ -1,0 +1,15 @@
+.header {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.container {
+  max-width: 970px !important;
+}
+
+.app-view {
+  margin-bottom: 20px;
+}
+
+.library-view table tr{
+  cursor: pointer;
+}

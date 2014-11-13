@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  </head>
   <body>
     <!-- Scripts may be placed anywhere on a page. But FYI, they block rendering of elements
      below them until after the scripts load-->
@@ -8,9 +11,11 @@
     <script src="bower_components/backbone/backbone.js"></script>
 
     <link rel="stylesheet" type="text/css" href='bower_components/bootstrap/dist/css/bootstrap.min.css'>
+    <link rel="stylesheet" type="text/css" href='styles/styles.css'>
 
     <script src="data/data.js"></script>
 
+    <script src="lib/buffer-loader.js"></script>
     <script src="lib/visualizer.js"></script>
     <script src="models/SongModel.js"></script>
     <script src="collections/Songs.js"></script>
@@ -26,9 +31,15 @@
 
 
     <div class="container">
-        <h1>MyTunes</h1>
-        <canvas width='700px' height='200px'></canvas>
-        <div class='app-view'></div>
+        <div class='header'>
+            <h1>MyTunes</h1>
+        </div>
+        <div class='row'>
+            <div class='col-sm-12'>
+                <canvas width='970' height='150'></canvas>
+            </div>
+        </div>
+        <div class='app-view row'></div>
     </div>
 
     <script>
@@ -41,7 +52,11 @@
         window.app = app;
         window.appView = appView;
         // put the view onto the screen
-        $('body').append(appView.render());
+        $('.container').append(appView.render());
+
+        setTimeout(function () {
+            $('#September').trigger('click');
+        });
       });
     </script>
   </body>

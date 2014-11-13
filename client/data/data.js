@@ -32,35 +32,35 @@ var songData = [{
   title: "September",
   artist: "Earth, Wind, and Fire",
 }, {
-  url: "http://thejsj.com/2014/songs/lo-dawn_of_midi.mp3",
+  url: "songs/lo-dawn_of_midi.mp3",
   title: "Dawn Of Midi",
   artist: "Lo",
 }, {
-  url: "http://thejsj.com/2014/songs/yuck-souther_skies.mp3",
+  url: "songs/yuck-souther_skies.mp3",
   title: "Southern Skies",
   artist: "Yuck",
 }, {
-  url: "http://thejsj.com/2014/songs/jorge_ben_jorge-taj_mahal.mp3",
+  url: "songs/jorge_ben_jorge-taj_mahal.mp3",
   title: "Taj Mahal",
   artist: "Jorge Ben Jor",
 }, {
-  url: "http://thejsj.com/2014/songs/elis_regina_tom_jobin-aguas_de_marco.mp3",
+  url: "songs/elis_regina_tom_jobin-aguas_de_marco.mp3",
   title: "Aguas de Marco",
   artist: "Ellis Regina & Tom Jobin",
 }, {
-  url: "http://thejsj.com/2014/songs/aventura-solor_por_un_beso.mp3",
+  url: "songs/aventura-solor_por_un_beso.mp3",
   title: "Solo por un beso",
   artist: "Aventura",
 }, {
-  url: "http://thejsj.com/2014/songs/benny_sing-little_donna.mp3",
+  url: "songs/benny_sing-little_donna_converted-0.mp3",
   title: "Little Donna",
   artist: "Benny Sings",
 }, {
-  url: "http://thejsj.com/2014/songs/allman_brothers_band-ramblin-man.mp3",
+  url: "songs/allman_brothers_band-ramblin-man.mp3",
   title: "Ramblin' Man",
   artist: "Allman Brothers Band",
 }, {
-  url: "http://thejsj.com/2014/songs/casa_azul-superguay.mp3",
+  url: "songs/casa_azul-superguay.mp3",
   title: "Superguay",
   artist: "Casa Azul",
 }];
