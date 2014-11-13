@@ -4,7 +4,7 @@ var songData = [{
   title: "One In A Million",
   artist: "Aaliyah",
 }, {
-  url: "https://s3-us-west-1.amazonaws.com/hr-mytunes/data/03+Age+Ain%27t+Nothing+But+A+Number.mp3",
+  url: "songs/age-aint-nothing-but-g-thing.mp3",
   title: "Age Ain't Nothing But A Number",
   artist: "Aaliyah",
 }, {
@@ -16,19 +16,19 @@ var songData = [{
   title: "If Your Girl Only Knew",
   artist: "Aaliyah",
 }, {
-  url: "http://thejsj.com/2014/songs/psy-gangnam_style.mp3",
+  url: "songs/psy-gangnam_style.mp3",
   title: "Gangnam Style",
   artist: "PSY",
 }, {
-  url: "http://thejsj.com/2014/songs/pharrell_williams-happy.mp3",
+  url: "songs/pharrell_williams-happy.mp3",
   title: "Happy",
   artist: "Pharrell Williams",
 }, {
-  url: "http://thejsj.com/2014/songs/taylor_swift-shake_it_off.mp3",
+  url: "songs/taylor_swift-shake_it_off.mp3",
   title: "Shake it Off",
   artist: "Taylor Swift",
 }, {
-  url: "http://thejsj.com/2014/songs/earth_wind_and_fire-september.mp3",
+  url: "songs/earth_wind_and_fire-september.mp3",
   title: "September",
   artist: "Earth, Wind, and Fire",
 }, {

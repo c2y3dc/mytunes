@@ -7,8 +7,11 @@
     <script src="bower_components/underscore/underscore.js"></script>
     <script src="bower_components/backbone/backbone.js"></script>
 
+    <link rel="stylesheet" type="text/css" href='bower_components/bootstrap/dist/css/bootstrap.min.css'>
+
     <script src="data/data.js"></script>
 
+    <script src="lib/visualizer.js"></script>
     <script src="models/SongModel.js"></script>
     <script src="collections/Songs.js"></script>
     <script src="collections/SongQueue.js"></script>
@@ -20,6 +23,13 @@
     <script src="views/SongQueueView.js"></script>
     <script src="views/SongQueueEntryView.js"></script>
     <script src="views/AppView.js"></script>
+
+
+    <div class="container">
+        <h1>MyTunes</h1>
+        <canvas width='700px' height='200px'></canvas>
+        <div class='app-view'></div>
+    </div>
 
     <script>
       $(function(){

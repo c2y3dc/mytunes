@@ -3,13 +3,13 @@ var SongQueue = Songs.extend({
 
   initialize: function(){
     this
-      .on('add', this.enqueueSong, this)
+      .on('add', this.enqueue, this)
       .on('ended', this.ended, this)
       .on('dequeue', this.dequeue, this);
 
   },
 
-  enqueueSong: function () {
+  enqueue: function () {
     if(this.models && this.models.length === 1){
       this.playFirst();
     }

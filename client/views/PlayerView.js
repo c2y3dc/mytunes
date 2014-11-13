@@ -1,6 +1,12 @@
 // PlayerView.js - Defines a backbone view class for the music player.
 var PlayerView = Backbone.View.extend({
 
+
+  tagName: "div",
+  attributes:  {
+    class: 'col-md-12',
+  },
+
   events: {
     'ended': 'ended'
   },
@@ -12,6 +18,7 @@ var PlayerView = Backbone.View.extend({
   setSong: function(song){
     this.model = song;
     this.render();
+    this.visualizer = new SongVisualizer(this.model.get('url'));
   },
 
   render: function(){
