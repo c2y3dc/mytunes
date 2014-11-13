@@ -33,7 +33,6 @@ describe('PlayerView', function () {
 
   describe('Song transitions', function () {
     it('dequeues a song when finished playing & plays the next song', function () {
-      console.clear();
       var firstSong = library.at(0),
         secondSong = library.at(1),
         thirdSong = library.at(2),
@@ -46,21 +45,11 @@ describe('PlayerView', function () {
       songQueue.playFirst();
       expect(appView.playerView.model).to.equal(firstSong);
       // Simulate the end of the first song
-      console.log('playerView.model');
-      console.log(appView.playerView.model);
-      console.log('trigger ended');
       $(appView.playerView.el).trigger('ended');
-      console.log("firstSong");
-      console.log(firstSong);
-      console.log("secondSong");
-      console.log(secondSong);
-      console.log("appView.playerView.model");
-      console.log(appView.playerView.model);
-
       expect(appView.playerView.model).to.equal(secondSong);
-      // // Simulate the end of the second song
-      // $(appView.playerView.el).trigger('ended');
-      // expect(appView.playerView.model).to.equal(thirdSong);
+      // Simulate the end of the second song
+      $(appView.playerView.el).trigger('ended');
+      expect(appView.playerView.model).to.equal(thirdSong);
     });
   });
 
