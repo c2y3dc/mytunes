@@ -2,9 +2,10 @@
 var SongQueue = Songs.extend({
 
   initialize: function(){
-    this.on('add', this.enqueueSong, this);
-    this.on('ended', this.ended, this);
-    this.on('dequeue', this.dequeue, this);
+    this
+      .on('add', this.enqueueSong, this)
+      .on('ended', this.ended, this)
+      .on('dequeue', this.dequeue, this);
 
   },
 
@@ -19,15 +20,15 @@ var SongQueue = Songs.extend({
   },
 
   dequeue: function(song){
-    if(song){
+    if (song) {
       this.remove(song);
-    }else{
+    } else {
       this.shift();
     }
   },
 
-  ended: function(){
-    this.dequeue();
+  ended: function(song){
+    this.dequeue(song);
     if(this.models && this.models.length === 1){
       this.playFirst();
     }

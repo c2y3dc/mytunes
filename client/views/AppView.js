@@ -2,6 +2,7 @@
 var AppView = Backbone.View.extend({
 
   initialize: function(params){
+
     this.playerView = new PlayerView({
       model: this.model.get('currentSong'),
     });
@@ -14,18 +15,20 @@ var AppView = Backbone.View.extend({
       collection: this.model.get('songQueue'),
     });
 
-    this.playerView.on('ended', this.dequeue, this);
-    // change:currentSong - this is Backbone's way of allowing you to filter events to
-    // ONLY receive change events for the specific property, 'currentSong'
-    this.model.on('change:currentSong', this.setSong, this);
-    this.model.get('songQueue').on('remove', this.playNextSong, this);
+    // Event listeners
+    this.playerView
+      .on('ended', this.ended, this);
+    this.model.get('songQueue')
+      .on('remove', this.playNextSong, this);
+    this.model
+      .on('change:currentSong', this.setSong, this);
   },
 
   render: function(){
     return this.$el.html([
-      this.playerView.$el,
-      this.libraryView.$el,
-      this.songQueueView.$el
+      this.playerView.$el, // jQuery Element
+      this.libraryView.$el, // jQuery Element
+      this.songQueueView.$el // jQuery Element
     ]);
   },
 
@@ -33,7 +36,7 @@ var AppView = Backbone.View.extend({
     this.playerView.setSong(model.get('currentSong'));
   },
 
-  dequeue: function(){
+  ended: function(){
     this.get('songQueue').ended();
   },
 
