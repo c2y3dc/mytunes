@@ -1,6 +1,6 @@
 /*
  * Copyright 2013 Boris Smus. All Rights Reserved.
- 
+
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -87,7 +87,7 @@ var SongVisualizer = function (songLocation) {
   this.isPlaying = false;
   this.startTime = 0;
   this.startOffset = 0;
-  setTimeout(this.togglePlayback.bind(this), 2000);
+  setTimeout(this.togglePlayback.bind(this), 3000);
 };
 
 // Toggle playback

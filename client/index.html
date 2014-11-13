@@ -49,14 +49,8 @@
         var app = new AppModel({ library: library });
         // build a view for the top level of the whole app
         var appView = new AppView({model: app});
-        window.app = app;
-        window.appView = appView;
         // put the view onto the screen
         $('.container').append(appView.render());
-
-        setTimeout(function () {
-            $('#September').trigger('click');
-        });
       });
     </script>
   </body>
