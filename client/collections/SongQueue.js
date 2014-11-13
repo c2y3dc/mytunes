@@ -3,26 +3,34 @@ var SongQueue = Songs.extend({
 
   initialize: function(){
     this.on('add', this.enqueueSong, this);
-    this.on('ended', this.dequeue, this);
+    this.on('ended', this.ended, this);
+    this.on('dequeue', this.dequeue, this);
+
   },
 
   enqueueSong: function () {
-    console.log('enqueSong: ', this.model.length);
     if(this.models && this.models.length === 1){
-      console.log('+ Playing First');
       this.playFirst();
-    } else {
-      console.log('Not Playing first');
     }
   },
 
   playFirst: function(){
-    console.log('playFirst');
     this.models[0].play();
   },
 
-  dequeue: function(){
-    this.shift();
+  dequeue: function(song){
+    if(song){
+      this.remove(song);
+    }else{
+      this.shift();
+    }
+  },
+
+  ended: function(){
+    this.dequeue();
+    if(this.models && this.models.length === 1){
+      this.playFirst();
+    }
   },
 
   getCurrentSong: function(){
