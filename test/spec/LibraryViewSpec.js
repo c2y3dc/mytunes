@@ -11,7 +11,7 @@ describe("LibraryView", function () {
       title: 'Sizzle Sundays',
       url: 'fake/url'
     }];
-    fakeSongs = new Songs(fakeSongData);
+    fakeSongs = new SongQueue(fakeSongData);
   });
 
   it("should render its subviews when you render it", function () {
