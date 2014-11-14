@@ -15,9 +15,10 @@ var PlayerView = Backbone.View.extend({
   el: '<audio id="audio-player" controls />',
 
   setSong: function (song) {
+    console.log('Set Song');
     this.model = song;
     this.render();
-    this.visualizer = new SongVisualizer(this.model.get('url'));
+    this.visualizer = new SongVisualizer(this.model.get('url'), this.ended.bind(this));
   },
 
   render: function () {
@@ -25,6 +26,7 @@ var PlayerView = Backbone.View.extend({
   },
 
   ended: function () {
+    console.log('Ended');
     this.model.ended();
   }
 

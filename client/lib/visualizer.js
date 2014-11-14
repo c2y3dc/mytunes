@@ -72,7 +72,7 @@ var HEIGHT = 150;
 var SMOOTHING = 0.8;
 var FFT_SIZE = 2048;
 
-var SongVisualizer = function (songLocation) {
+var SongVisualizer = function (songLocation, callback) {
   this.analyser = context.createAnalyser();
 
   this.analyser.connect(context.destination);
@@ -83,6 +83,7 @@ var SongVisualizer = function (songLocation) {
   });
   this.freqs = new Uint8Array(this.analyser.frequencyBinCount);
   this.times = new Uint8Array(this.analyser.frequencyBinCount);
+  this.callback = callback;
 
   this.isPlaying = false;
   this.startTime = 0;
@@ -92,9 +93,7 @@ var SongVisualizer = function (songLocation) {
 
 // Toggle playback
 SongVisualizer.prototype.togglePlayback = function () {
-  console.log('tooglePlayback');
   if (this.isPlaying) {
-    console.log('STOP PLAYBCAK');
     // Stop playback
     this.source[this.source.stop ? 'stop' : 'noteOff'](0);
     this.startOffset += context.currentTime - this.startTime;
@@ -106,7 +105,6 @@ SongVisualizer.prototype.togglePlayback = function () {
     this.source.connect(this.analyser);
     this.source.buffer = this.buffer;
     this.source.loop = false;
-    window.source = this.source;
     // Start playback, but make sure we stay in bound of the buffer.
     this.source[this.source.start ? 'start' : 'noteOn'](0, this.startOffset % this.buffer.duration);
     // Start visualizer.
@@ -130,6 +128,14 @@ SongVisualizer.prototype.draw = function () {
   var drawContext = canvas.getContext('2d');
   canvas.width = WIDTH;
   canvas.height = HEIGHT;
+
+  if (this.analyser.context.currentTime > this.buffer.duration + this.startTime) {
+    this.isPlaying = !this.isPlaying;
+    if (this.callback !== undefined) {
+      this.callback();
+    }
+  }
+
   // Draw the frequency domain chart.
   for (var i = 0; i < this.analyser.frequencyBinCount; i++) {
     var value = this.freqs[i];
@@ -143,8 +149,6 @@ SongVisualizer.prototype.draw = function () {
   }
   if (this.isPlaying) {
     requestAnimFrame(this.draw.bind(this));
-  } else {
-
   }
 };
 
