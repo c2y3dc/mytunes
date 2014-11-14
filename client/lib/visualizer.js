@@ -1,3 +1,4 @@
+/*globals BufferLoader:true */
 /*
  * Copyright 2013 Boris Smus. All Rights Reserved.
 
@@ -15,14 +16,17 @@
  */
 
 // Start off by initializing a new context.
-context = new(window.AudioContext || window.webkitAudioContext)();
+var context = new(window.AudioContext || window.webkitAudioContext)();
 
-if (!context.createGain)
+if (!context.createGain) {
   context.createGain = context.createGainNode;
-if (!context.createDelay)
+}
+if (!context.createDelay) {
   context.createDelay = context.createDelayNode;
-if (!context.createScriptProcessor)
+}
+if (!context.createScriptProcessor) {
   context.createScriptProcessor = context.createJavaScriptNode;
+}
 
 // shim layer with setTimeout fallback
 window.requestAnimFrame = (function () {
@@ -36,14 +40,7 @@ window.requestAnimFrame = (function () {
     };
 })();
 
-function playSound(buffer, time) {
-  var source = context.createBufferSource();
-  source.buffer = buffer;
-  source.connect(context.destination);
-  source[source.start ? 'start' : 'noteOn'](time);
-}
-
-function loadSounds(obj, soundMap, callback) {
+var loadSounds = function (obj, soundMap, callback) {
   // Array-ify
   var names = [];
   var paths = [];
@@ -52,7 +49,7 @@ function loadSounds(obj, soundMap, callback) {
     names.push(name);
     paths.push(path);
   }
-  bufferLoader = new BufferLoader(context, paths, function (bufferList) {
+  var bufferLoader = new BufferLoader(context, paths, function (bufferList) {
     for (var i = 0; i < bufferList.length; i++) {
       var buffer = bufferList[i];
       var name = names[i];
@@ -63,7 +60,7 @@ function loadSounds(obj, soundMap, callback) {
     }
   });
   bufferLoader.load();
-}
+};
 
 var WIDTH = 970;
 var HEIGHT = 150;
@@ -108,26 +105,19 @@ SongVisualizer.prototype.togglePlayback = function () {
     // Start playback, but make sure we stay in bound of the buffer.
     this.source[this.source.start ? 'start' : 'noteOn'](0, this.startOffset % this.buffer.duration);
     // Start visualizer.
-    requestAnimFrame(this.draw.bind(this));
+    window.requestAnimFrame(this.draw.bind(this));
   }
   this.isPlaying = !this.isPlaying;
 };
 
 
-SongVisualizer.prototype.draw = function () {
+SongVisualizer.prototype.draw = function() {
   this.analyser.smoothingTimeConstant = SMOOTHING;
   this.analyser.fftSize = FFT_SIZE;
 
   // Get the frequency data from the currently playing music
   this.analyser.getByteFrequencyData(this.freqs);
   this.analyser.getByteTimeDomainData(this.times);
-
-  var width = Math.floor(1 / this.freqs.length, 10);
-
-  var canvas = document.querySelector('canvas');
-  var drawContext = canvas.getContext('2d');
-  canvas.width = WIDTH;
-  canvas.height = HEIGHT;
 
   if (this.analyser.context.currentTime > this.buffer.duration + this.startTime) {
     this.isPlaying = !this.isPlaying;
@@ -136,6 +126,20 @@ SongVisualizer.prototype.draw = function () {
     }
   }
 
+  this.render();
+
+  if (this.isPlaying) {
+    window.requestAnimFrame(this.draw.bind(this));
+  }
+};
+
+SongVisualizer.prototype.render = function () {
+  var canvas = document.querySelector('canvas');
+  var drawContext = canvas.getContext('2d');
+
+  canvas.width = WIDTH;
+  canvas.height = HEIGHT;
+
   // Draw the frequency domain chart.
   for (var i = 0; i < this.analyser.frequencyBinCount; i++) {
     var value = this.freqs[i];
@@ -143,12 +147,8 @@ SongVisualizer.prototype.draw = function () {
     var height = HEIGHT * percent;
     var offset = HEIGHT - height - 1;
     var barWidth = WIDTH / this.analyser.frequencyBinCount;
-    var hue = i / this.analyser.frequencyBinCount * 360;
     drawContext.fillStyle = 'hsl(150, 100%, 50%)';
     drawContext.fillRect(i * barWidth, offset, barWidth, height);
-  }
-  if (this.isPlaying) {
-    requestAnimFrame(this.draw.bind(this));
   }
 };
 

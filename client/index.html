@@ -43,10 +43,9 @@
     </div>
 
     <script>
+      /*global AppModel:true, $:true, AppView:true */
       $(function(){
-        // set up model objects
-        var library = new Songs(songData);
-        var app = new AppModel({ library: library });
+        var app = new AppModel();
         // build a view for the top level of the whole app
         var appView = new AppView({model: app});
         // put the view onto the screen

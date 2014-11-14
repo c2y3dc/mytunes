@@ -1,4 +1,5 @@
-// SongModel.js - Defines a backbone model class for songs.
+/*global Backbone:true */
+
 var SongModel = Backbone.Model.extend({
 
   play: function(){
